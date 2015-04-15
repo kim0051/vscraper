@@ -45,3 +45,4 @@ def printMessage(lst, suffix):
             print("\nNo files of type", suffix, "were found.")
         else:
             print("\nFinished. Downloaded all files of type", suffix)
+getFiles()
