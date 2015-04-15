@@ -20,20 +20,17 @@ soup = bs(response.text)
 def getFiles():
         
     for link in soup.find_all('a'): # Finds all links
-        if suffix in str(link): # If the link ends in .pdf
+        # If the file is a link ending in the entered suffix 
+        if suffix in str(link):
             link_list.append(link.get('href'))
 
-    for i in range(len(link_list)):
-        file_names.append(str(link_list[i]).replace('/[^/]*$',''))
-    print(file_names)
-
-    #for j in range(len(link_list)):
-        #file_names.append(link_list[j].replace("http://www.cs.bu.edu/~snyder/cs112/Lectures/", "")
+    for link in link_list:
+        file_names.append(link.rpartition('/')[-1])
     
-    #for link in link_list:
-        #for name in file_names:
-            #urlretrieve(link, filepath + name)
-    
+    for link in link_list:
+        for name in file_names:
+            urlretrieve(link, filepath + name)
+            
     printMessage(link_list)
     
 def printMessage(lst):
