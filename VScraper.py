@@ -29,7 +29,7 @@ def getFiles():
     
     for link in link_list:
         for name in file_names:
-            urlretrieve(link, filepath + name)
+            urlretrieve(link, filepath + '\\' + name)
             
     printMessage(link_list)
     
