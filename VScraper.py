@@ -2,16 +2,18 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.request import urlretrieve
 
+bs = BeautifulSoup
 
 url = input("Enter the URL you want to scrape from: ")
 print("")
-
-bs = BeautifulSoup
 
 link_list = []
 file_names = []
 suffix = input("What type of file do you want to scrape? \
                \nExamples: .png, .pdf, .doc - ")
+
+filepath = input("Specify a file path to save to: ")
+
 response = requests.get(url, stream=True)
 soup = bs(response.text)
 
@@ -30,9 +32,9 @@ def getFiles():
     
     #for link in link_list:
         #for name in file_names:
-            #urlretrieve(link, name)
+            #urlretrieve(link, filepath + name)
+    
     printMessage(link_list)
-
     
 def printMessage(lst):
         if lst == []:
