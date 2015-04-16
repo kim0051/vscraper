@@ -1,4 +1,5 @@
-# VScraper
+![alt tag](http://fjv4.com/img/portfolio/vscraper-banner.png)
+
 A Python Web Scraper that allows users to enter any URL, and scrape a file of any type they specify.
 
 ## Requirements
