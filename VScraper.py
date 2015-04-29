@@ -6,10 +6,16 @@ import time
 bs = BeautifulSoup
 debug = False
 def db(string):
+    """ Debugging function for program; won't have to
+    write 'print' every time, and can turn on/off
+    while still keeping in the debug calls"""
+    
     if debug:
         print("\t", string)
         
 def getFiles():
+    """ Gets files of specified extension through user input"""
+    
     url = input("Enter the URL you want to scrape from: ")
 
     suffix = input("\nWhat type of file do you want to scrape? \
@@ -47,6 +53,8 @@ def getFiles():
         print("\nGoodbye")
         
 def printMessage(lst, suffix):
+    """ Notifies user when done downloading files OR
+    if there are no files of the type they specified"""
         if lst == []:
             print("\nNo files of type", suffix, "were found.")
         else:
