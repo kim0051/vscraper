@@ -6,7 +6,6 @@ import time
 bs = BeautifulSoup
 def getFiles():
     url = input("Enter the URL you want to scrape from: ")
-    
 
     suffix = input("\nWhat type of file do you want to scrape? \
                \nExamples: .png, .pdf, .doc - ")
@@ -29,9 +28,9 @@ def getFiles():
 
     i = 0
     for link in link_list:
-        urlretrieve(url.rsplit('/',1)[0] + '/' + link, filepath + '\\' + file_names[i])
+        urlretrieve(url.rsplit('/',1)[0] + link, filepath + '\\' + file_names[i])
         i += 1
-                        
+            
     printMessage(link_list, suffix)
 
     repeat = input("\nScrape from another URL? ")
