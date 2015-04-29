@@ -55,10 +55,11 @@ def getFiles():
 def printMessage(lst, suffix):
     """ Notifies user when done downloading files OR
     if there are no files of the type they specified"""
-        if lst == []:
-            print("\nNo files of type", suffix, "were found.")
-        else:
-            print("\nFinished. Downloaded all files of type", suffix)
-        time.sleep(2)
+    
+    if lst == []:
+        print("\nNo files of type", suffix, "were found.")
+    else:
+        print("\nFinished. Downloaded all files of type", suffix)
+    time.sleep(2)
 
 getFiles()
