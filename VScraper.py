@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.request import urlretrieve
-import time
+from time import sleep
 
 bs = BeautifulSoup
 debug = False
@@ -49,7 +49,7 @@ def getFiles():
         getFiles()
     else:
         print("Closing program...")
-        time.sleep(3)
+        sleep(3)
         print("\nGoodbye")
         
 def printMessage(lst, suffix):
@@ -60,6 +60,6 @@ def printMessage(lst, suffix):
         print("\nNo files of type", suffix, "were found.")
     else:
         print("\nFinished. Downloaded all files of type", suffix)
-    time.sleep(2)
+    sleep(2)
 
 getFiles()
