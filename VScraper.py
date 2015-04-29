@@ -28,7 +28,6 @@ def getFiles():
 
     i = 0
     for link in link_list:
-        print("Full stuff...", url.rsplit('/',1)[0] + link, filepath + '\\' + file_names[i])
         urlretrieve(url.rsplit('/',1)[0] + '/' + link, filepath + '\\' + file_names[i])
         i += 1
             
