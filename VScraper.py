@@ -4,6 +4,11 @@ from urllib.request import urlretrieve
 import time
 
 bs = BeautifulSoup
+debug = False
+def db(string):
+    if debug:
+        print("\t", string)
+        
 def getFiles():
     url = input("Enter the URL you want to scrape from: ")
 
