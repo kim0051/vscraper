@@ -1,6 +1,8 @@
+[![Code Climate](https://codeclimate.com/github/FreddieV4/VScraper/badges/gpa.svg)](https://codeclimate.com/github/FreddieV4/VScraper)
+
 ![alt tag](http://fjv4.com/img/portfolio/vscraper-banner.png)
 
-A Python web scraping tool that allows users to enter any URL, scrape all files of the type they specify, and then download those files to their device.
+A Python web scraping tool that allows users to enter any URL, scrape all files of the type they specify, and then download those files to their local directory.
 
 ## Requirements
   - This program was made and is run with Python 3.4.2 and uses these libraries in order to run:
