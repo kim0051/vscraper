@@ -55,24 +55,31 @@ def getFiles():
         
     # db("--- %s seconds ---" %(time() - start_time))    
     printMessage(link_list, suffix)
-
-    repeat = input("\nScrape from another URL? ")
-    if repeat.startswith("y") or repeat.startswith("Y"):
-        getFiles()
-    else:
-        print("Closing program...")
-        sleep(3)
-        print("\nGoodbye")
+    decision = input("\nScrape from another URL? ")
+    repeat(decision)
         
 ############################################################################# 
 def printMessage(lst, suffix):
     """ Notifies user when done downloading files OR
-    if there are no files of the type they specified """
+    if there are no files of the type they specified
+    Input: List of file names, String for file extension """
     
     if lst == []:
         print("\nNo files of type", suffix, "were found.")
     else:
         print("\nFinished. Downloaded all files of type", suffix)
     sleep(2)
+    
+#############################################################################
+def repeat(decision):
+    """ Function for running the file scraper again
+    Input: String 'yes' or 'no' """
+    
+    if decision.startswith("y") or decision.startswith("Y"):
+        getFiles()
+    else:
+        print("Closing program...")
+        sleep(3)
+        print("\nGoodbye")
 
 getFiles()
