@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.request import urlretrieve
-from time import sleep
+import time
 
 bs = BeautifulSoup
 debug = False
@@ -25,7 +25,8 @@ def getFiles():
 
     link_list = []
     file_names = []
-
+    
+    # start_time = time.time()
     response = requests.get(url, stream=True)
     soup = bs(response.text)
         
@@ -41,15 +42,16 @@ def getFiles():
     for link in link_list:
         urlretrieve(url.rsplit('/',1)[0] + '/' + link, filepath + '\\' + file_names[i])
         i += 1
-            
-    printMessage(link_list, suffix)
+        
+    print("--- %s seconds ---" %(time.time() - start_time))    
+    # printMessage(link_list, suffix)
 
     repeat = input("\nScrape from another URL? ")
     if repeat.startswith("y") or repeat.startswith("Y"):
         getFiles()
     else:
         print("Closing program...")
-        sleep(3)
+        time.sleep(3)
         print("\nGoodbye")
         
 def printMessage(lst, suffix):
@@ -60,6 +62,6 @@ def printMessage(lst, suffix):
         print("\nNo files of type", suffix, "were found.")
     else:
         print("\nFinished. Downloaded all files of type", suffix)
-    sleep(2)
+    time.sleep(2)
 
 getFiles()
