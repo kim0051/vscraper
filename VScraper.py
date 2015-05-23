@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup as bs
 from urllib.request import urlretrieve
 from time import sleep, time
 
+http = "http://"
 debug = False
 
 def db(string):
@@ -30,7 +31,11 @@ def getFiles():
     file_names = []
     
     # start_time = time()
-    response = requests.get(url, stream=True)
+    if http not in url: # if the user forgets to include "http://" in the URL, concatenate it with the URL
+        response = requests.get(http + url, stream=True)
+    else:
+        response = requests.get(url, stream=True)
+        
     soup = bs(response.text)
 
     # finds all links    
