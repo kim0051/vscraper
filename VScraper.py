@@ -60,8 +60,8 @@ def getFiles():
             
         # db("--- %s seconds ---" %(time() - start_time))    
         printMessage(link_list, suffix)
-        decision = input("\nScrape from another URL? ")
-        return repeat(decision)
+        if not repeat(input("\nScrape from another URL? ")):
+            break
         
 ############################################################################# 
 def printMessage(lst, suffix):
@@ -82,10 +82,8 @@ def repeat(decision):
     
     if decision.startswith("y") or decision.startswith("Y"):
         return True
-    else:
-        print("Closing program...")
-        sleep(3)
-        print("\nGoodbye")
-        return False
+    
+    print("Closing program..."), sleep(3), print("\nGoodbye")
+    return False
 
 getFiles()
