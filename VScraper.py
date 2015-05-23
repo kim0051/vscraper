@@ -1,9 +1,8 @@
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup as bs
 from urllib.request import urlretrieve
 from time import sleep, time
 
-bs = BeautifulSoup
 debug = False
 
 def db(string):
