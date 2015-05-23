@@ -20,47 +20,48 @@ def getFiles():
     from a specified full URL path; downloads each file to
     the user's specified local directory. """
     
-    url = input("Enter the URL you want to scrape from: ")
+    while True:
+        url = input("Enter the URL you want to scrape from: ")
 
-    suffix = input("\nWhat type of file do you want to scrape? \
-               \nExamples: .png, .pdf, .doc - ")
+        suffix = input("\nWhat type of file do you want to scrape? \
+                   \nExamples: .png, .pdf, .doc - ")
 
-    filepath = input("Specify a file path to save to: ")
+        filepath = input("Specify a file path to save to: ")
 
-    link_list = []
-    file_names = []
-    
-    # start_time = time()
-    if http not in url: # if the user forgets to include "http://" in the URL, concatenate it with the URL
-        response = requests.get(http + url, stream=True)
-    else:
-        response = requests.get(url, stream=True)
+        link_list = []
+        file_names = []
         
-    soup = bs(response.text)
+        # start_time = time()
+        if http not in url: # if the user forgets to include "http://" in the URL, concatenate it with the URL
+            response = requests.get(http + url, stream=True)
+        else:
+            response = requests.get(url, stream=True)
+            
+        soup = bs(response.text)
 
-    # finds all links    
-    for link in soup.find_all('a'):
-        # If the file is a link ending in the entered suffix 
-        if suffix in str(link):
-            link_list.append(link.get('href'))
+        # finds all links    
+        for link in soup.find_all('a'):
+            # If the file is a link ending in the entered suffix 
+            if suffix in str(link):
+                link_list.append(link.get('href'))
 
-    # assigns the filename to each downloaded file
-    # taken from the file name; after the last forward slash
-    # in the website's directory
-    for link in link_list:
-        file_names.append(link.rpartition('/')[-1])
+        # assigns the filename to each downloaded file
+        # taken from the file name; after the last forward slash
+        # in the website's directory
+        for link in link_list:
+            file_names.append(link.rpartition('/')[-1])
 
-    # saves the file to the local directory specified by the user
-    # with the file names assigned in the previous for loop
-    i = 0
-    for link in link_list:
-        urlretrieve(url.rsplit('/',1)[0] + '/' + link, filepath + '\\' + file_names[i])
-        i += 1
-        
-    # db("--- %s seconds ---" %(time() - start_time))    
-    printMessage(link_list, suffix)
-    decision = input("\nScrape from another URL? ")
-    repeat(decision)
+        # saves the file to the local directory specified by the user
+        # with the file names assigned in the previous for loop
+        i = 0
+        for link in link_list:
+            urlretrieve(url.rsplit('/',1)[0] + '/' + link, filepath + '\\' + file_names[i])
+            i += 1
+            
+        # db("--- %s seconds ---" %(time() - start_time))    
+        printMessage(link_list, suffix)
+        decision = input("\nScrape from another URL? ")
+        return repeat(decision)
         
 ############################################################################# 
 def printMessage(lst, suffix):
@@ -80,10 +81,11 @@ def repeat(decision):
     Input: String 'yes' or 'no' """
     
     if decision.startswith("y") or decision.startswith("Y"):
-        getFiles()
+        return True
     else:
         print("Closing program...")
         sleep(3)
         print("\nGoodbye")
+        return False
 
 getFiles()
