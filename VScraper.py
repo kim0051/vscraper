@@ -42,9 +42,9 @@ def print_message(lst, suffix):
     """
     
     if lst:
-        print("\nNo files of type", suffix, "were found.")
+        print("Finished. Downloaded all files of type", suffix)
     else:
-        print("\nFinished. Downloaded all files of type", suffix)
+        print("No files of type", suffix, "were found.")
 
 
 def repeat(decision):
