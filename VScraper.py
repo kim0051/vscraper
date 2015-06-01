@@ -66,11 +66,10 @@ def printMessage(lst, suffix):
     if there are no files of the type they specified
     Input: List of file names, String for file extension """
     
-    if lst == []:
+    if lst:
         print("\nNo files of type", suffix, "were found.")
     else:
         print("\nFinished. Downloaded all files of type", suffix)
-    sleep(2)
     
 #############################################################################
 def repeat(decision):
