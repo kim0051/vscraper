@@ -32,7 +32,7 @@ def getFiles():
         file_names = []
         
         # start_time = time()
-        if http not in url: # if the user forgets to include "http://" in the URL, concatenate it with the URL
+        if not url.startswith(http): # if the user forgets to include "http://" in the URL, concatenate it with the URL
             response = requests.get(http + url, stream=True)
         else:
             response = requests.get(url, stream=True)
