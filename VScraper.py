@@ -24,13 +24,13 @@ def get_files():
         response = requests.get(url, stream=True)            
         soup = bs(response.text)
 
-        link_list = [link.get('href') for link in soup.find_all('a') if suffix in str(link)]
+        list_of_links = [link.get('href') for link in soup.find_all('a') if suffix in str(link)]
 
-        for link in link_list:
+        for link in list_of_links:
             file_name = link.rpartition('/')[-1]
             urlretrieve(url.rsplit('/', 1)[0] + '/' + link, filepath + '\\' + file_name)
             
-        print_message(link_list, suffix)
+        print_message(list_of_links, suffix)
         if not repeat(input("\nScrape from another URL? ")):
             break
 
