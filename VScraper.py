@@ -53,10 +53,8 @@ def getFiles():
 
         # saves the file to the local directory specified by the user
         # with the file names assigned in the previous for loop
-        i = 0
-        for link in link_list:
+        for i, link in enumerate(link_list):
             urlretrieve(url.rsplit('/',1)[0] + '/' + link, filepath + '\\' + file_names[i])
-            i += 1
             
         # db("--- %s seconds ---" %(time() - start_time))    
         printMessage(link_list, suffix)
