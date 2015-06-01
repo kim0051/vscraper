@@ -27,8 +27,8 @@ def get_files():
         link_list = [link.get('href') for link in soup.find_all('a') if suffix in str(link)]
 
         for link in link_list:
-            file_names.append(link.rpartition('/')[-1])
-            urlretrieve(url.rsplit('/',1)[0] + '/' + link, filepath + '\\' + file_names[i])            
+            file_name = link.rpartition('/')[-1]
+            urlretrieve(url.rsplit('/', 1)[0] + '/' + link, filepath + '\\' + file_name)
             
         print_message(link_list, suffix)
         if not repeat(input("\nScrape from another URL? ")):
