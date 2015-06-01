@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup as bs
 
                
-def getFiles():
+def get_files():
     """ Gets files of specified extension through user input
     from a specified full URL path; downloads each file to
     the user's specified local directory.
@@ -30,12 +30,12 @@ def getFiles():
             file_names.append(link.rpartition('/')[-1])
             urlretrieve(url.rsplit('/',1)[0] + '/' + link, filepath + '\\' + file_names[i])            
             
-        printMessage(link_list, suffix)
+        print_message(link_list, suffix)
         if not repeat(input("\nScrape from another URL? ")):
             break
 
 
-def printMessage(lst, suffix):
+def print_message(lst, suffix):
     """ Notifies user when done downloading files OR
     if there are no files of the type they specified
     Input: List of file names, String for file extension
