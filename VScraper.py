@@ -1,7 +1,8 @@
+from urllib.request import urlretrieve
+from time import sleep
+ 
 import requests
 from bs4 import BeautifulSoup as bs
-from urllib.request import urlretrieve
-from time import sleep, time
 
 http = "http://"
 debug = False
