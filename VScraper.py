@@ -4,7 +4,6 @@ from time import sleep
 import requests
 from bs4 import BeautifulSoup as bs
 
-http = "http://"
 debug = False
 
 def db(string):
@@ -33,11 +32,10 @@ def getFiles():
         file_names = []
         
         # start_time = time()
-        if not url.startswith(http): # if the user forgets to include "http://" in the URL, concatenate it with the URL
-            response = requests.get(http + url, stream=True)
-        else:
-            response = requests.get(url, stream=True)
-            
+         if not url.startswith('http://') and not url.startswith('https://'):
+            url += 'http://'
+
+        response = requests.get(url, stream=True)            
         soup = bs(response.text)
 
         # finds all links    
