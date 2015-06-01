@@ -9,7 +9,8 @@ debug = False
 def db(string):
     """ Debugging function for program; won't have to
     write 'print' every time, and can turn on/off
-    while still keeping in the debug calls """
+    while still keeping in the debug calls
+    """
     
     if debug:
         print("\t", string)
@@ -18,7 +19,8 @@ def db(string):
 def getFiles():
     """ Gets files of specified extension through user input
     from a specified full URL path; downloads each file to
-    the user's specified local directory. """
+    the user's specified local directory.
+    """
     
     while True:
         url = input("Enter the URL you want to scrape from: ")
@@ -64,7 +66,8 @@ def getFiles():
 def printMessage(lst, suffix):
     """ Notifies user when done downloading files OR
     if there are no files of the type they specified
-    Input: List of file names, String for file extension """
+    Input: List of file names, String for file extension
+    """
     
     if lst:
         print("\nNo files of type", suffix, "were found.")
@@ -74,7 +77,8 @@ def printMessage(lst, suffix):
 #############################################################################
 def repeat(decision):
     """ Function for running the file scraper again
-    Input: String 'yes' or 'no' """
+    Input: String 'yes' or 'no'
+    """
     
     if decision.lower().startswith("y"):
         return True
@@ -84,4 +88,5 @@ def repeat(decision):
     print("\nGoodbye")
     return False
 
-getFiles()
+if __name__ == '__main__':
+    get_files()
