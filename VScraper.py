@@ -32,7 +32,7 @@ def getFiles():
         file_names = []
         
         # start_time = time()
-         if not url.startswith('http://') and not url.startswith('https://'):
+        if not url.startswith('http://') and not url.startswith('https://'):
             url += 'http://'
 
         response = requests.get(url, stream=True)            
@@ -76,10 +76,12 @@ def repeat(decision):
     """ Function for running the file scraper again
     Input: String 'yes' or 'no' """
     
-    if decision.startswith("y") or decision.startswith("Y"):
+    if decision.lower().startswith("y"):
         return True
     
-    print("Closing program..."), sleep(3), print("\nGoodbye")
+    print("Closing program...")
+    sleep(3)
+    print("\nGoodbye")
     return False
 
 getFiles()
