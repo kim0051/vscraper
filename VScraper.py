@@ -40,22 +40,14 @@ def getFiles():
         response = requests.get(url, stream=True)            
         soup = bs(response.text)
 
-        # finds all links    
-        for link in soup.find_all('a'):
-            # If the file is a link ending in the entered suffix 
-            if suffix in str(link):
-                link_list.append(link.get('href'))
+        link_list = [link.get('href') for link in soup.find_all('a') if suffix in str(link)]
 
         # assigns the filename to each downloaded file
         # taken from the file name; after the last forward slash
         # in the website's directory
         for link in link_list:
             file_names.append(link.rpartition('/')[-1])
-
-        # saves the file to the local directory specified by the user
-        # with the file names assigned in the previous for loop
-        for i, link in enumerate(link_list):
-            urlretrieve(url.rsplit('/',1)[0] + '/' + link, filepath + '\\' + file_names[i])
+            urlretrieve(url.rsplit('/',1)[0] + '/' + link, filepath + '\\' + file_names[i])            
             
         # db("--- %s seconds ---" %(time() - start_time))    
         printMessage(link_list, suffix)
