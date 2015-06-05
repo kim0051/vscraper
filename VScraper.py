@@ -47,6 +47,7 @@ def print_message(lst, suffix):
     
     if lst:
         print("Finished. Downloaded all files of type", suffix)
+        print("There where", str(len(lst)), "file(s).")
     else:
         print("No files of type", suffix, "were found.")
 
