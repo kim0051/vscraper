@@ -1,6 +1,6 @@
 from urllib.request import urlretrieve
 from time import sleep
- 
+import csv
 import requests
 from bs4 import BeautifulSoup as bs
 
