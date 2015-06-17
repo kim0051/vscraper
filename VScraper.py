@@ -16,35 +16,16 @@ def get_files():
     the user's specified local directory.
     """
 
-    csvfilename = input("Enter the CSV file you want to read from: ")
+    csvfilename = input("Enter the CSV file you want to read from: ") + '.csv'
     if os.path.isfile(csvfilename):
-        print("File, " "'" + csvfilename + "'", "exists. Ready to read CSV.")
+        print("File", "'" + csvfilename + "'", "exists\n")
+        print("Reading CSV file...\n")
         
-        with open(csvfilename, 'rb') as csvfile:
+        with open(csvfilename, 'r') as csvfile:
             filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
             for row in filereader:
-                print(', ').join(row)
-
-        while True: 
-            suffix = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
-            filepath = input("Specify a file path to save to: ")
-
-            if not url.startswith('http://') and not url.startswith('https://'):
-                url += 'http://'
-
-            response = requests.get(url, stream=True)            
-            soup = bs(response.text)
-
-            list_of_links = [link.get('href') for link in soup.find_all('a') if suffix in str(link)]
-
-            for link in list_of_links:
-                file_name = link.rpartition('/')[-1]
-                urlretrieve(url.rsplit('/', 1)[0] + '/' + link, filepath + '\\' + file_name)
-                
-            print_message(list_of_links, suffix)
-            if not repeat(input("\nScrape from another URL? ")):
-                break
-
+                print(', '.join(row))
+            print("\nFinished reading rows")                
     else:
         print("File, " "'" + csvfilename + "'", "does not exist.")
 
