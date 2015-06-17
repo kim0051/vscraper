@@ -1,6 +1,6 @@
 from urllib.request import urlretrieve
 from time import sleep
- 
+import csv
 import requests
 from bs4 import BeautifulSoup as bs
 
@@ -8,7 +8,7 @@ images = ['.png', '.jpg', '.jpeg', '.gif']
 audio = ['.mp3', '.mp4']
 text = ['.txt', '.doc', '.docx', '.rtf']
 
-               
+....               
 def get_files():
     """ Gets files of specified extension through user input
     from a specified full URL path; downloads each file to
