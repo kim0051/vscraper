@@ -14,12 +14,17 @@ def get_files():
     from a specified full URL path; downloads each file to
     the user's specified local directory.
     """
+
+    csv = input("Enter the CSV file you want to read from: ")
     
-    while True:
-        url = input("Enter the URL you want to scrape from: ")
+    with open(csv, 'rb') as csvfile:
+        filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+        for row in filereader:
+            print(', ').join(row)
 
-        suffix = input("\nWhat type of file do you want to scrape? \nExamples: .png, .pdf, .doc - ")
-
+    
+    while True: 
+        suffix = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
         filepath = input("Specify a file path to save to: ")
 
         if not url.startswith('http://') and not url.startswith('https://'):
