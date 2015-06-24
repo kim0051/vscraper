@@ -31,6 +31,9 @@ def get_files():
             for row in filereader:
                 list_of_links.append(row)
             print("\nFinished reading rows")
+
+        suffix = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
+       
     else:
         print("File, " "'" + csvfilename + "'", "does not exist \
               in the current directory.")
