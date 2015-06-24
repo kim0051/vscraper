@@ -43,6 +43,10 @@ def get_files():
             soup = bs(response.text)
             for file in soup.find_all('a'):
                 file.get('href')
+                file_name = link[0].rpartition('/')[-1]
+                urlretrieve(link[0].split('/', 1)[0] + '/' + file, file_name)
+        print("\nFinished scraping files")
+        print_message(list_of_links, suffix)
     else:
         print("File, " "'" + csvfilename + "'", "does not exist \
               in the current directory.")
