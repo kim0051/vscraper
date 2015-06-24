@@ -9,6 +9,7 @@ images = ['.png', '.jpg', '.jpeg', '.gif']
 audio = ['.mp3', '.mp4']
 text = ['.txt', '.doc', '.docx', '.rtf']
 list_of_links = []
+file_name = ''
 
 debug = True
 def db(string):
@@ -33,7 +34,7 @@ def get_files():
             print("\nFinished reading rows")
 
         suffix = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
-        print("OK. Scraping files of type: ", suffix)
+        print("\nOK. Scraping files of type:", suffix)
         db("List of links: " + str(list_of_links))
         for url in list_of_links:
             db("Link: " + str(url[0]))
