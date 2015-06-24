@@ -36,6 +36,9 @@ def get_files():
         print("OK. Scraping files of type: ", suffix)
         db("List of links: " + str(list_of_links))
         for link in list_of_links:
+            db("Link: " + str(link[0]))
+            if not link[0].startswith('http://') and not link[0].startswith('https://'):
+                link[0] += 'http://'
             
     else:
         print("File, " "'" + csvfilename + "'", "does not exist \
