@@ -47,7 +47,10 @@ def get_files():
             for link in soup.find_all('a'):
                 if suffix in str(link):
                     link.get('href')
+                    print(type(file_name))
                     file_name = link.get('href')
+                    db("fn: " + file_name)
+                    db("Link split: " + url[0] + file_name)
                     urlretrieve(url[0] + file_name, file_name)
                     
         print("\nFinished scraping files")
