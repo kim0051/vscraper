@@ -8,7 +8,6 @@ import os.path
 images = ['.png', '.jpg', '.jpeg', '.gif']
 audio = ['.mp3', '.mp4']
 text = ['.txt', '.doc', '.docx', '.rtf']
-list_of_links = []
 
 debug = True
 def db(string):
@@ -24,14 +23,12 @@ def get_files():
     csvfilename = input("Enter the CSV file you want to read from: ") + '.csv'
     if os.path.isfile(csvfilename):
         print("File", "'" + csvfilename + "'", "exists\n")
-        print("Reading CSV file...\n")
+        print("Reading CSV file...")
         
         with open(csvfilename, 'r') as csvfile:
             filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
             suffix = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
             for url in filereader:
-                print("URL!", url[0])
-                # list_of_links.append(row)
                 if not url[0].startswith('http://') and not url[0].startswith('https://'):
                     url[0] += 'http://'
             
