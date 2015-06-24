@@ -36,6 +36,7 @@ def get_files():
         suffix = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
         print("\nOK. Scraping files of type:", suffix)
         db("List of links: " + str(list_of_links))
+        
         for url in list_of_links:
             db("Link: " + str(url[0]))
             if not url[0].startswith('http://') and not url[0].startswith('https://'):
@@ -51,8 +52,10 @@ def get_files():
                     file_name = link.rpartition('/')[-1]
                     db("fn: " + file_name)
                     urlretrieve(link.split('/', 1)[0] + '/' + link, file_name)
+                    
         print("\nFinished scraping files")
         print_message(list_of_links, suffix)
+        
     else:
         print("File, " "'" + csvfilename + "'", "does not exist \
               in the current directory.")
