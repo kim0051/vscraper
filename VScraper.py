@@ -39,7 +39,10 @@ def get_files():
             db("Link: " + str(link[0]))
             if not link[0].startswith('http://') and not link[0].startswith('https://'):
                 link[0] += 'http://'
-            
+            response = requests.get(link[0], stream=True)
+            soup = bs(response.text)
+            for file in soup.find_all('a'):
+                file.get('href')
     else:
         print("File, " "'" + csvfilename + "'", "does not exist \
               in the current directory.")
