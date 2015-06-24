@@ -9,7 +9,6 @@ images = ['.png', '.jpg', '.jpeg', '.gif']
 audio = ['.mp3', '.mp4']
 text = ['.txt', '.doc', '.docx', '.rtf']
 list_of_links = []
-file_name = ''
 
 debug = True
 def db(string):
@@ -21,7 +20,7 @@ def get_files():
     from a specified full URL path; downloads each file to
     the user's specified local directory.
     """
-
+    file_name = ''
     csvfilename = input("Enter the CSV file you want to read from: ") + '.csv'
     if os.path.isfile(csvfilename):
         print("File", "'" + csvfilename + "'", "exists\n")
@@ -48,10 +47,8 @@ def get_files():
             for link in soup.find_all('a'):
                 if suffix in str(link):
                     link.get('href')
-                    db("href: " + link.get('href'))
-                    file_name = link.rpartition('/')[-1]
-                    db("fn: " + file_name)
-                    urlretrieve(link.split('/', 1)[0] + '/' + link, file_name)
+                    file_name = link.get('href')
+                    urlretrieve(url[0] + file_name, file_name)
                     
         print("\nFinished scraping files")
         print_message(list_of_links, suffix)
