@@ -35,16 +35,21 @@ def get_files():
         suffix = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
         print("OK. Scraping files of type: ", suffix)
         db("List of links: " + str(list_of_links))
-        for link in list_of_links:
-            db("Link: " + str(link[0]))
-            if not link[0].startswith('http://') and not link[0].startswith('https://'):
-                link[0] += 'http://'
-            response = requests.get(link[0], stream=True)
+        for url in list_of_links:
+            db("Link: " + str(url[0]))
+            if not url[0].startswith('http://') and not url[0].startswith('https://'):
+                url[0] += 'http://'
+            
+            response = requests.get(url[0], stream=True)
             soup = bs(response.text)
-            for file in soup.find_all('a'):
-                file.get('href')
-                file_name = link[0].rpartition('/')[-1]
-                urlretrieve(link[0].split('/', 1)[0] + '/' + file, file_name)
+
+            for link in soup.find_all('a'):
+                if suffix in str(link):
+                    link.get('href')
+                    db("href: " + link.get('href'))
+                    file_name = link.rpartition('/')[-1]
+                    db("fn: " + file_name)
+                    urlretrieve(link.split('/', 1)[0] + '/' + link, file_name)
         print("\nFinished scraping files")
         print_message(list_of_links, suffix)
     else:
