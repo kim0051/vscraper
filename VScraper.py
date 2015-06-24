@@ -8,7 +8,12 @@ import os.path
 images = ['.png', '.jpg', '.jpeg', '.gif']
 audio = ['.mp3', '.mp4']
 text = ['.txt', '.doc', '.docx', '.rtf']
+list_of_links = []
 
+debug = True
+def db(string):
+    if(debug):
+        print('\t', string)
 
 def get_files():
     """ Gets files of specified extension through user input
@@ -24,10 +29,11 @@ def get_files():
         with open(csvfilename, 'r') as csvfile:
             filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
             for row in filereader:
-                print(', '.join(row))
-            print("\nFinished reading rows")                
+                list_of_links.append(row)
+            print("\nFinished reading rows")
     else:
-        print("File, " "'" + csvfilename + "'", "does not exist.")
+        print("File, " "'" + csvfilename + "'", "does not exist \
+              in the current directory.")
 
 def print_message(lst, suffix):
     """ Notifies user when done downloading files OR
