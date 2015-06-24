@@ -33,7 +33,10 @@ def get_files():
             print("\nFinished reading rows")
 
         suffix = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
-       
+        print("OK. Scraping files of type: ", suffix)
+        db("List of links: " + str(list_of_links))
+        for link in list_of_links:
+            
     else:
         print("File, " "'" + csvfilename + "'", "does not exist \
               in the current directory.")
