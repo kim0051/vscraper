@@ -20,7 +20,7 @@ def get_files():
     from a specified full URL path; downloads each file to
     the user's specified local directory.
     """
-    file_name = ''
+
     csvfilename = input("Enter the CSV file you want to read from: ") + '.csv'
     if os.path.isfile(csvfilename):
         print("File", "'" + csvfilename + "'", "exists\n")
@@ -34,10 +34,8 @@ def get_files():
 
         suffix = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
         print("\nOK. Scraping files of type:", suffix)
-        db("List of links: " + str(list_of_links))
         
         for url in list_of_links:
-            db("Link: " + str(url[0]))
             if not url[0].startswith('http://') and not url[0].startswith('https://'):
                 url[0] += 'http://'
             
