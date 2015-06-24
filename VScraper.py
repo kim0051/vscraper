@@ -28,25 +28,20 @@ def get_files():
         
         with open(csvfilename, 'r') as csvfile:
             filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-            for row in filereader:
-                list_of_links.append(row)
-            print("\nFinished reading rows")
-
-        suffix = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
-        print("\nOK. Scraping files of type:", suffix)
-        
-        for url in list_of_links:
-            if not url[0].startswith('http://') and not url[0].startswith('https://'):
-                url[0] += 'http://'
+            suffix = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
+            for url in filereader:
+                print("URL!", url[0])
+                # list_of_links.append(row)
+                if not url[0].startswith('http://') and not url[0].startswith('https://'):
+                    url[0] += 'http://'
             
-            response = requests.get(url[0], stream=True)
-            soup = bs(response.text)
+                response = requests.get(url[0], stream=True)
+                soup = bs(response.text)
 
-            for link in soup.find_all('a'):
-                if suffix in str(link):
-                    urlretrieve(url[0] + link.get('href'), link.get('href'))
-                    
-        print("\nFinished scraping files")
+                for link in soup.find_all('a'):
+                    if suffix in str(link):
+                        urlretrieve(url[0] + link.get('href'), link.get('href'))
+                        
         print_message(list_of_links, suffix)
         
     else:
