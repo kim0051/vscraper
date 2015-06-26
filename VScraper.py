@@ -30,22 +30,21 @@ def get_files():
             filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
             suffix = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
             for url in filereader:
-                if not url[0].startswith('http://') and not url[0].startswith('https://'):
-                    url[0] += 'http://'
+                url = url[0].rpartition('/')[0]
+                if not url.startswith('http://') and not url.startswith('https://'):
+                    url += 'http://'
             
-                response = requests.get(url[0], stream=True)
+                response = requests.get(url, stream=True)
                 soup = bs(response.text)
 
                 for link in soup.find_all('a'):
                     if suffix in str(link):
                         files.append(link.get('href'))
-                        urlretrieve(url[0] + link.get('href'), link.get('href'))
+                        urlretrieve(url + '/' + link.get('href'), link.get('href'))
                         
         print_message(files, suffix)
-        
     else:
-        print("File, " "'" + csvfilename + "'", "does not exist \
-              in the current directory.")
+        print("\nFile", "'" + csvfilename + "'", "does not exist in the current directory.")
 
 def print_message(lst, suffix):
     """ Notifies user when done downloading files OR
@@ -54,10 +53,10 @@ def print_message(lst, suffix):
     """
     
     if lst:
-        print("Finished. Downloaded all files of type", suffix)
+        print("\nFinished. Downloaded all files of type", suffix)
         print("There where", str(len(lst)), "file(s).")
     else:
-        print("No files of type", suffix, "were found.")
+        print("\nNo files of type", suffix, "were found.")
 
 
 def repeat(decision):
