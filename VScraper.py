@@ -5,9 +5,10 @@ import requests
 from bs4 import BeautifulSoup as bs
 import os.path
 
-images = ['.png', '.jpg', '.jpeg', '.gif']
-audio = ['.mp3', '.mp4']
-text = ['.txt', '.doc', '.docx', '.rtf', '.pdf']
+TYPES_DICT = { 'images':['.png', '.jpg', '.jpeg', '.gif'],
+                'audio':['.mp3', '.mp4'],
+                'text':['.txt', '.doc', '.docx', '.rtf', '.pdf'], }
+
 files = []
 
 debug = True
@@ -48,11 +49,10 @@ def get_files(file, file_type):
                 soup = bs(response.text)
 
                 for link in soup.find_all('a'):
-                    db("Here is the link being examined: " + str(link))
-                    for suffix in file_type:
-                        db("Here is the file_type: " + file_type)
-                        db("Here is the suffix being examined: " + suffix)
+                    db("Here is the link being examined: " + str(link.get('href')))
+                    for suffix in TYPES_DICT[file_type]:
                         if suffix in str(link):
+                            db("Suffix: " + suffix + " was found. Retrieving...")
                             files.append(link.get('href'))
                             urlretrieve(url + '/' + link.get('href'), link.get('href'))
 
