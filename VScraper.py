@@ -1,69 +1,73 @@
 from urllib.request import urlretrieve
-from time import sleep
 import csv
 import requests
 from bs4 import BeautifulSoup as bs
+import os.path
 
-images = ['.png', '.jpg', '.jpeg', '.gif']
-audio = ['.mp3', '.mp4']
-text = ['.txt', '.doc', '.docx', '.rtf']
+TYPES_DICT = {  'images':['.png', '.jpg', '.jpeg', '.gif'],
+                'audio':['.mp3', '.mp4'],
+                'text':['.txt', '.doc', '.docx', '.rtf', '.pdf'],
+                'code':['.js', '.html', '.css', '.py', '.java'], }
 
-               
-def get_files():
-    """ Gets files of specified extension through user input
-    from a specified full URL path; downloads each file to
-    the user's specified local directory.
+files = []
+
+debug = False
+def db(string):
+    if(debug):
+        print('\t', string)
+
+def main():
+    """ Main function that asks for user input and prints out results """
+
+    csvfilename = input("Enter the CSV file name you want to read from: ") + '.csv'
+    if os.path.isfile(csvfilename):
+        print("File", "'" + csvfilename + "'", "exists\n")
+        print("Reading CSV file...")
+        file_type = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text, code - ")
+
+        get_files(csvfilename, file_type)   
+        print_message(files, file_type)
+        
+    else:
+        print("\nFile", "'" + csvfilename + "'", "does not exist in the current directory.")
+
+
+def get_files(file, file_type):
+    """ Downloads files of type 'file_type', specified by the user.
+    Input: The file name of the csv file, the type of file that
+    the user wants to scrape; can be images, text, or audio
     """
     
-    while True:
-        url = input("Enter the URL you want to scrape from: ")
-
-        suffix = input("\nWhat type of file do you want to scrape? \nExamples: .png, .pdf, .doc - ")
-
-        filepath = input("Specify a file path to save to: ")
-
-        if not url.startswith('http://') and not url.startswith('https://'):
-            url += 'http://'
-
-        response = requests.get(url, stream=True)            
-        soup = bs(response.text)
-
-        list_of_links = [link.get('href') for link in soup.find_all('a') if suffix in str(link)]
-
-        for link in list_of_links:
-            file_name = link.rpartition('/')[-1]
-            urlretrieve(url.rsplit('/', 1)[0] + '/' + link, filepath + '\\' + file_name)
+    with open(file, 'r') as csvfile:
+            filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+            for url in filereader:
+                url = url[0].rpartition('/')[0]
+                if not url.startswith('http://') and not url.startswith('https://'):
+                    url += 'http://'
             
-        print_message(list_of_links, suffix)
-        if not repeat(input("\nScrape from another URL? ")):
-            break
+                response = requests.get(url, stream=True)
+                soup = bs(response.text)
+
+                for link in soup.find_all('a'):
+                    db("Here is the link being examined: " + str(link.get('href')))
+                    for suffix in TYPES_DICT[file_type]:
+                        if suffix in str(link):
+                            db("Suffix: " + suffix + " was found. Retrieving...")
+                            files.append(link.get('href'))
+                            urlretrieve(url + '/' + link.get('href'), link.get('href'))
 
 
-def print_message(lst, suffix):
+def print_message(lst, file_type):
     """ Notifies user when done downloading files OR
     if there are no files of the type they specified
     Input: List of file names, String for file extension
     """
     
     if lst:
-        print("Finished. Downloaded all files of type", suffix)
+        print("\nFinished. Downloaded all files of type", file_type)
         print("There where", str(len(lst)), "file(s).")
     else:
-        print("No files of type", suffix, "were found.")
-
-
-def repeat(decision):
-    """ Function for running the file scraper again
-    Input: String 'yes' or 'no'
-    """
-    
-    if decision.lower().startswith("y"):
-        return True
-    
-    print("Closing program...")
-    sleep(3)
-    print("\nGoodbye")
-    return False
+        print("\nNo files of type", file_type, "were found.")
 
 if __name__ == '__main__':
-    get_files()
+    main()
