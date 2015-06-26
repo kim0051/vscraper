@@ -19,7 +19,8 @@ A Python web scraping tool that allows users to scrape all files of the type the
       - [requests](http://docs.python-requests.org/en/latest/)
       - [BeautifulSoup4](http://www.crummy.com/software/BeautifulSoup/bs4/doc/)
       - [urllib](https://docs.python.org/3/library/urllib.html)
-      - [time](https://docs.python.org/2/library/time.html)
+      - [csv](https://docs.python.org/3/library/csv.html)
+      - [os](https://docs.python.org/3/library/os.html)
 
 ## Problems?
 Create an issue here on my GitHub page and I'll fix issues as soon as I can.
