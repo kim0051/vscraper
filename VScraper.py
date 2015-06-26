@@ -21,14 +21,14 @@ def get_files():
     the user's specified local directory.
     """
 
-    csvfilename = input("Enter the CSV file you want to read from: ") + '.csv'
+    csvfilename = input("Enter the CSV file name you want to read from: ") + '.csv'
     if os.path.isfile(csvfilename):
         print("File", "'" + csvfilename + "'", "exists\n")
         print("Reading CSV file...")
         
         with open(csvfilename, 'r') as csvfile:
             filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-            suffix = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
+            file_type = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
             for url in filereader:
                 url = url[0].rpartition('/')[0]
                 if not url.startswith('http://') and not url.startswith('https://'):
@@ -38,25 +38,25 @@ def get_files():
                 soup = bs(response.text)
 
                 for link in soup.find_all('a'):
-                    if suffix in str(link):
+                    if file_type in str(link):
                         files.append(link.get('href'))
                         urlretrieve(url + '/' + link.get('href'), link.get('href'))
                         
-        print_message(files, suffix)
+        print_message(files, file_type)
     else:
         print("\nFile", "'" + csvfilename + "'", "does not exist in the current directory.")
 
-def print_message(lst, suffix):
+def print_message(lst, file_type):
     """ Notifies user when done downloading files OR
     if there are no files of the type they specified
     Input: List of file names, String for file extension
     """
     
     if lst:
-        print("\nFinished. Downloaded all files of type", suffix)
+        print("\nFinished. Downloaded all files of type", file_type)
         print("There where", str(len(lst)), "file(s).")
     else:
-        print("\nNo files of type", suffix, "were found.")
+        print("\nNo files of type", file_type, "were found.")
 
 
 def repeat(decision):
