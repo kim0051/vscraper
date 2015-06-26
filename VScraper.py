@@ -48,9 +48,13 @@ def get_files(file, file_type):
                 soup = bs(response.text)
 
                 for link in soup.find_all('a'):
-                    if file_type in str(link):
-                        files.append(link.get('href'))
-                        urlretrieve(url + '/' + link.get('href'), link.get('href'))
+                    db("Here is the link being examined: " + str(link))
+                    for suffix in file_type:
+                        db("Here is the file_type: " + file_type)
+                        db("Here is the suffix being examined: " + suffix)
+                        if suffix in str(link):
+                            files.append(link.get('href'))
+                            urlretrieve(url + '/' + link.get('href'), link.get('href'))
 
 
 def print_message(lst, file_type):
