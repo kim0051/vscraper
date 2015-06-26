@@ -8,6 +8,7 @@ import os.path
 images = ['.png', '.jpg', '.jpeg', '.gif']
 audio = ['.mp3', '.mp4']
 text = ['.txt', '.doc', '.docx', '.rtf']
+files = []
 
 debug = True
 def db(string):
@@ -37,9 +38,10 @@ def get_files():
 
                 for link in soup.find_all('a'):
                     if suffix in str(link):
+                        files.append(link.get('href'))
                         urlretrieve(url[0] + link.get('href'), link.get('href'))
                         
-        print_message(list_of_links, suffix)
+        print_message(files, suffix)
         
     else:
         print("File, " "'" + csvfilename + "'", "does not exist \
