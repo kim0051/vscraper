@@ -25,6 +25,11 @@ A Python web scraping tool that allows users to scrape all files of the type the
 ## Problems?
 Create an issue here on my GitHub page and I'll fix issues as soon as I can.
 
+## Suggestions?
+Do either one of two things:
+  1. Create an issue with your suggestion using the tag `enhancement`
+  2. Fork this repository, make your changes to `VScraper.py` and submit a pull request
+
 ## Creator
 [VScraper](https://github.com/FreddieV4/VScraper) was created, and is maintained, by [Freddie Vargus](http://www.fjv4.com)
 
