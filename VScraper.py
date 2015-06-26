@@ -5,9 +5,10 @@ import requests
 from bs4 import BeautifulSoup as bs
 import os.path
 
-TYPES_DICT = { 'images':['.png', '.jpg', '.jpeg', '.gif'],
+TYPES_DICT = {  'images':['.png', '.jpg', '.jpeg', '.gif'],
                 'audio':['.mp3', '.mp4'],
-                'text':['.txt', '.doc', '.docx', '.rtf', '.pdf'], }
+                'text':['.txt', '.doc', '.docx', '.rtf', '.pdf'],
+                'code':['.js', '.html', '.css', '.py', '.java'], }
 
 files = []
 
@@ -23,11 +24,11 @@ def main():
     if os.path.isfile(csvfilename):
         print("File", "'" + csvfilename + "'", "exists\n")
         print("Reading CSV file...")
-        file_type = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
+        file_type = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text, code - ")
 
-        get_files(csvfilename, file_type) 
-                                
+        get_files(csvfilename, file_type)   
         print_message(files, file_type)
+        
     else:
         print("\nFile", "'" + csvfilename + "'", "does not exist in the current directory.")
 
@@ -68,20 +69,6 @@ def print_message(lst, file_type):
         print("There where", str(len(lst)), "file(s).")
     else:
         print("\nNo files of type", file_type, "were found.")
-
-
-def repeat(decision):
-    """ Function for running the file scraper again
-    Input: String 'yes' or 'no'
-    """
-    
-    if decision.lower().startswith("y"):
-        return True
-    
-    print("Closing program...")
-    sleep(3)
-    print("\nGoodbye")
-    return False
 
 if __name__ == '__main__':
     main()
