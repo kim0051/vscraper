@@ -7,7 +7,7 @@ import os.path
 
 images = ['.png', '.jpg', '.jpeg', '.gif']
 audio = ['.mp3', '.mp4']
-text = ['.txt', '.doc', '.docx', '.rtf']
+text = ['.txt', '.doc', '.docx', '.rtf', '.pdf']
 files = []
 
 debug = True
@@ -15,20 +15,30 @@ def db(string):
     if(debug):
         print('\t', string)
 
-def get_files():
-    """ Gets files of specified extension through user input
-    from a specified full URL path; downloads each file to
-    the user's specified local directory.
-    """
+def main():
+    """ Main function that asks for user input and prints out results """
 
     csvfilename = input("Enter the CSV file name you want to read from: ") + '.csv'
     if os.path.isfile(csvfilename):
         print("File", "'" + csvfilename + "'", "exists\n")
         print("Reading CSV file...")
-        
-        with open(csvfilename, 'r') as csvfile:
+        file_type = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
+
+        get_files(csvfilename, file_type) 
+                                
+        print_message(files, file_type)
+    else:
+        print("\nFile", "'" + csvfilename + "'", "does not exist in the current directory.")
+
+
+def get_files(file, file_type):
+    """ Downloads files of type 'file_type', specified by the user.
+    Input: The file name of the csv file, the type of file that
+    the user wants to scrape; can be images, text, or audio
+    """
+    
+    with open(file, 'r') as csvfile:
             filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-            file_type = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text - ")
             for url in filereader:
                 url = url[0].rpartition('/')[0]
                 if not url.startswith('http://') and not url.startswith('https://'):
@@ -41,10 +51,7 @@ def get_files():
                     if file_type in str(link):
                         files.append(link.get('href'))
                         urlretrieve(url + '/' + link.get('href'), link.get('href'))
-                        
-        print_message(files, file_type)
-    else:
-        print("\nFile", "'" + csvfilename + "'", "does not exist in the current directory.")
+
 
 def print_message(lst, file_type):
     """ Notifies user when done downloading files OR
@@ -73,4 +80,4 @@ def repeat(decision):
     return False
 
 if __name__ == '__main__':
-    get_files()
+    main()
