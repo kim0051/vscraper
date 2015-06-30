@@ -9,7 +9,7 @@ import os
 TYPES_DICT = {  'images':['.png', '.jpg', '.jpeg', '.gif', '.svg'],
                 'audio':['.mp3', '.mp4', '.wmv', '.m4a', '.wav'],
                 'text':['.txt', '.doc', '.docx', '.rtf', '.pdf', '.md'],
-                'code':['.js', '.html', '.css', '.php', 'rb', '.py', '.java', '.c', '.cpp', '.h', '.go', '.cs', '.sql', '.m', '.mat'], }
+                'code':['.js', '.html', '.css', '.php', '.rb', '.py', '.java', '.c', '.cpp', '.h', '.go', '.cs', '.sql', '.m', '.mat'], }
 
 files = []
 
@@ -31,6 +31,7 @@ def main():
             file_type = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text, code - ")
    
     else:
+        print("\nFile", "'" + csv_file_name + "'", "does not exist in the current directory.")
         if os.path.isfile(sys.argv[1]):
             csv_file_name = sys.argv[1]
         else:
@@ -55,7 +56,7 @@ def get_files(file, file_type):
     with open(file, 'r') as csvfile:
             filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
             for url in filereader:
-                url = url[0].rpartition('/')[0]
+                url = url[0]#.rpartition('/')[0]
                 db("URL is: " + url)
                 if not url.startswith('http://') and not url.startswith('https://'):
                     url = 'http://' + url
@@ -66,7 +67,8 @@ def get_files(file, file_type):
                 for link in soup.find_all('a'):
                     db("Here is the link being examined: " + str(link.get('href')).rpartition('/')[2])
                     for suffix in TYPES_DICT[file_type]:
-                        if suffix in str(link):
+                        db("Suffix being examined: " + suffix)
+                        if str(link.get('href')).endswith(suffix):
                             db("Suffix: " + suffix + " was found. Retrieving...")
                             files.append(link.get('href'))
                             urlretrieve(url + '/' + link.get('href'), link.get('href').rpartition('/')[2])
