@@ -6,10 +6,10 @@ import requests
 from bs4 import BeautifulSoup as bs
 import os.path
 
-TYPES_DICT = {  'images':['.png', '.jpg', '.jpeg', '.gif'],
-                'audio':['.mp3', '.mp4'],
-                'text':['.txt', '.doc', '.docx', '.rtf', '.pdf'],
-                'code':['.js', '.html', '.css', '.py', '.java'], }
+TYPES_DICT = {  'images':['.png', '.jpg', '.jpeg', '.gif', '.svg'],
+                'audio':['.mp3', '.mp4', '.wmv', '.m4a', '.wav'],
+                'text':['.txt', '.doc', '.docx', '.rtf', '.pdf', '.md'],
+                'code':['.js', '.html', '.css', '.php', 'rb', '.py', '.java', '.c', '.cpp', '.h', '.go', '.cs', '.sql', '.m', '.mat'], }
 
 files = []
 
