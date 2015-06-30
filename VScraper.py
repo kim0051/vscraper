@@ -13,7 +13,7 @@ TYPES_DICT = {  'images':['.png', '.jpg', '.jpeg', '.gif', '.svg'],
 
 files = []
 
-debug = False
+debug = True
 def db(string):
     if(debug):
         print('\t', string)
