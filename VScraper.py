@@ -52,7 +52,7 @@ def get_files(file, file_type):
             for url in filereader:
                 url = url[0].rpartition('/')[0]
                 if not url.startswith('http://') and not url.startswith('https://'):
-                    url += 'http://'
+                    url = 'http://' + url
             
                 response = requests.get(url, stream=True)
                 soup = bs(response.text)
