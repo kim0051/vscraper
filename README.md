@@ -8,10 +8,10 @@ A Python web scraping tool that allows users to scrape all files of the type the
 | Column 1            |
 |---------------------|
 | fjv4.com/js/        |
-| example.com/css/       |
+| example.com/css/    |
 | website.com/folder/ |
 
-**Still working on bug for images; currently trying to get images from `href`s but many images are in `src` of `img` tags, not `a` tags.**
+** There is still a bug when the URLs do not already contain the slug for the folder containing the files you want **
 
 # How to Run:
   1. Add URLs that you want to scrape from into a column of a CSV file**
