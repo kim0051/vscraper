@@ -20,6 +20,7 @@ def db(string):
 
 def main():
     """ Main function that asks for user input and prints out results """
+  
     if len(sys.argv) == 1:
         csv_file_name = input("Enter the CSV file name you want to read from: ") + '.csv'
         if os.path.isfile(csv_file_name):
