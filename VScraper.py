@@ -4,7 +4,7 @@ from urllib.request import urlretrieve
 import csv
 import requests
 from bs4 import BeautifulSoup as bs
-import os.path
+import os
 
 TYPES_DICT = {  'images':['.png', '.jpg', '.jpeg', '.gif', '.svg'],
                 'audio':['.mp3', '.mp4', '.wmv', '.m4a', '.wav'],
@@ -41,7 +41,9 @@ def main():
         except IndexError:
             file_type = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text, code - ")
             
-    get_files(csv_file_name, file_type)   
+    get_files(csv_file_name, file_type)
+    #out_dir = '/path/to/dir'
+    #os.system("mkdir {}".format(out_dir))
     print_message(files, file_type)
         
 def get_files(file, file_type):
@@ -77,7 +79,7 @@ def print_message(lst, file_type):
     
     if lst:
         print("\nFinished. Downloaded all files of type", file_type)
-        print("There where", str(len(lst)), "file(s).")
+        print("There were", str(len(lst)), "file(s).")
     else:
         print("\nNo files of type", file_type, "were found.")
 
