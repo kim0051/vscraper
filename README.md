@@ -14,7 +14,7 @@ A Python web scraping tool that allows users to scrape all files of the type the
 **There is still a bug when the URLs do not already contain the slug for the folder containing the files you want**
 
 # How to Run:
-  1. Add URLs that you want to scrape from into a column of a CSV file**
+  1. Add URLs that you want to scrape from into a column of a CSV file (one URL per row)**
   
 ### In IDLE:
 
