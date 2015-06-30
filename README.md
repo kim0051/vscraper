@@ -56,9 +56,9 @@ Do either one of two things:
   2. Fork this repository, make your changes to `VScraper.py` and submit a pull request
 
 ## Creator
-[VScraper](https://github.com/FreddieV4/VScraper) was created, and is maintained, by [Freddie Vargus](http://www.fjv4.com)
+[**VScraper**](https://github.com/FreddieV4/VScraper) was created, and is maintained, by **Freddie Vargus**
 
-  - Twitter Profile - [@Freddie_V4](http://www.twitter.com/Freddie_V4)
+  - Personal Site - [**fjv4.com**](http://fjv4.com)
   
 ## License
 
