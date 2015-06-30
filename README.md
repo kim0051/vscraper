@@ -21,6 +21,7 @@ A Python web scraping tool that allows users to scrape all files of the type the
       - [urllib](https://docs.python.org/3/library/urllib.html)
       - [csv](https://docs.python.org/3/library/csv.html)
       - [os](https://docs.python.org/3/library/os.html)
+      - [sys](https://docs.python.org/2/library/sys.html)
 
 ## Problems?
 Create an issue here on my GitHub page and I'll fix issues as soon as I can.
