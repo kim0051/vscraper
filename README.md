@@ -7,8 +7,8 @@ A Python web scraping tool that allows users to scrape all files of the type the
 # CSV Formatting
 | Column 1            |
 |---------------------|
-| fjv4.com/js/        |
-| example.com/css/    |
+| fjv4.com        |
+| example.com    |
 | website.com/folder/ |
 
 **There is still a bug when the URLs do not already contain the slug for the folder containing the files you want**
