@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+import sys
 from urllib.request import urlretrieve
 import csv
 import requests
@@ -18,20 +20,27 @@ def db(string):
 
 def main():
     """ Main function that asks for user input and prints out results """
-
-    csvfilename = input("Enter the CSV file name you want to read from: ") + '.csv'
-    if os.path.isfile(csvfilename):
-        print("File", "'" + csvfilename + "'", "exists\n")
-        print("Reading CSV file...")
-        file_type = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text, code - ")
-
-        get_files(csvfilename, file_type)   
-        print_message(files, file_type)
-        
+    if len(sys.argv) == 1:
+        csv_file_name = input("Enter the CSV file name you want to read from: ") + '.csv'
+        if os.path.isfile(csv_file_name):
+            print("File", "'" + csv_file_name + "'", "exists\n")
+            print("Reading CSV file...")
+            file_type = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text, code - ")
+   
     else:
-        print("\nFile", "'" + csvfilename + "'", "does not exist in the current directory.")
-
-
+        if os.path.isfile(sys.argv[1]):
+            csv_file_name = sys.argv[1]
+        else:
+            print("\nFile", "'" + str(sys.argv[1]) + "'", "does not exist in the current directory.")
+    
+        try:
+           file_type = sys.argv[2]
+        except IndexError:
+            file_type = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text, code - ")
+            
+    get_files(csv_file_name, file_type)   
+    print_message(files, file_type)
+        
 def get_files(file, file_type):
     """ Downloads files of type 'file_type', specified by the user.
     Input: The file name of the csv file, the type of file that
