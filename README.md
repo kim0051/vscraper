@@ -4,7 +4,7 @@
 
 A Python web scraping tool that allows users to scrape all files of the type they specify from a specified website and then download those files to their local directory.
 
-## CSV Formatting
+# CSV Formatting
 | Column 1            |
 |---------------------|
 | fjv4.com/js/        |
@@ -13,12 +13,30 @@ A Python web scraping tool that allows users to scrape all files of the type the
 
 **Still working on bug for images; currently trying to get images from `href`s but many images are in `src` of `img` tags, not `a` tags.**
 
-## How to Use:
+# How to Run:
   1. Add URLs that you want to scrape from into a column of a CSV file**
-  2. Run the program
-  3. Enter the name of the CSV file you created
-  4. Enter the type of file you want to scrape
-  5. Done! All of your files should have been scraped from the URLs, with an output displaying the number of files that were scraped
+  
+### In IDLE:
+
+  2a. Run the program
+  3a. Enter the name of the CSV file you created
+  4a. Enter the type of file you want to scrape
+  5a. Done! All of your files should have been scraped from the URLs, with an output displaying the number of files that were scraped
+  
+### On Linux/Mac OS:
+
+  2b. Run `./VScraper.py csvname.csv code` from the command line
+  3b. Done! All of your files should have been scraped from the URLs, with an output displaying the number of files that were scraped
+  
+  
+### On Windows:
+
+  2c. cd into the directory containing `VScraper.py`
+  3c. Run `py -3 VScraper.py csvname.csv code`
+  4c. Done! All of your files should have been scraped from the URLs, with an output displaying the number of files that were scraped
+  
+**The arguments `csvname.csv` would be the name of your csv file, and `code` the type of file you want to scrape**
+
   
 ** **Make sure the CSV  file is in the same directory as VScraper.py**
 
