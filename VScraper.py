@@ -13,7 +13,7 @@ TYPES_DICT = {  'images':['.png', '.jpg', '.jpeg', '.gif', '.svg'],
 
 files = []
 
-debug = False
+debug = True
 def db(string):
     if(debug):
         print('\t', string)
@@ -56,6 +56,7 @@ def get_files(file, file_type):
             filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
             for url in filereader:
                 url = url[0].rpartition('/')[0]
+                db("URL is: " + url)
                 if not url.startswith('http://') and not url.startswith('https://'):
                     url = 'http://' + url
             
@@ -63,12 +64,12 @@ def get_files(file, file_type):
                 soup = bs(response.text)
 
                 for link in soup.find_all('a'):
-                    db("Here is the link being examined: " + str(link.get('href')))
+                    db("Here is the link being examined: " + str(link.get('href')).rpartition('/')[2])
                     for suffix in TYPES_DICT[file_type]:
                         if suffix in str(link):
                             db("Suffix: " + suffix + " was found. Retrieving...")
                             files.append(link.get('href'))
-                            urlretrieve(url + '/' + link.get('href'), link.get('href'))
+                            urlretrieve(url + '/' + link.get('href'), link.get('href').rpartition('/')[2])
 
 
 def print_message(lst, file_type):
