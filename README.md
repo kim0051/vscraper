@@ -63,3 +63,7 @@ Do either one of two things:
 ## License
 
 Uses the [MIT License](https://github.com/FreddieV4/VScraper/blob/master/LICENSE)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/FreddieV4/vscraper/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
