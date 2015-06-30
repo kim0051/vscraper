@@ -13,7 +13,7 @@ TYPES_DICT = {  'images':['.png', '.jpg', '.jpeg', '.gif', '.svg'],
 
 files = []
 
-debug = True
+debug = False
 def db(string):
     if(debug):
         print('\t', string)
@@ -29,9 +29,10 @@ def main():
             print("File", "'" + csv_file_name + "'", "exists\n")
             print("Reading CSV file...")
             file_type = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text, code - ")
+        else:
+            print("\nFile", "'" + csv_file_name + "'", "does not exist in the current directory.")
    
     else:
-        print("\nFile", "'" + csv_file_name + "'", "does not exist in the current directory.")
         if os.path.isfile(sys.argv[1]):
             csv_file_name = sys.argv[1]
         else:
