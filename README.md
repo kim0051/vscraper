@@ -4,11 +4,20 @@
 
 A Python web scraping tool that allows users to scrape all files of the type they specify from a specified website and then download those files to their local directory.
 
+## CSV Formatting
+| Column 1            |
+|---------------------|
+| fjv4.com/js/        |
+| example.com/css/       |
+| website.com/folder/ |
+
+**Still working on bug for images; currently trying to get images from `href`s but many images are in `src` of `img` tags, not `a` tags.**
+
 ## How to Use:
   1. Add URLs that you want to scrape from into a column of a CSV file**
   2. Run the program
   3. Enter the name of the CSV file you created
-  4. Enter a directory to save to
+  4. Enter the type of file you want to scrape
   5. Done! All of your files should have been scraped from the URLs, with an output displaying the number of files that were scraped
   
 ** **Make sure the CSV  file is in the same directory as VScraper.py**
