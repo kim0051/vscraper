@@ -57,7 +57,7 @@ Do either one of two things:
 [**VScraper**](https://github.com/FreddieV4/VScraper) was created, and is maintained, by **Freddie Vargus**
 
   - Personal Site - [**fjv4.com**](http://fjv4.com)
-  - Twitter Profile - [@Freddie_V4](http://www.twitter.com/Freddie_V4)
+  - Twitter Profile - [**@Freddie_V4**](http://www.twitter.com/Freddie_V4)
   
 ## License
 
