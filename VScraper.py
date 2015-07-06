@@ -42,18 +42,18 @@ def main():
            file_type = sys.argv[2]
         except IndexError:
             file_type = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text, code - ")
-        
-    get_files(csv_file_name, file_type, file_type)
+            
+    get_files(csv_file_name, file_type)
+    #out_dir = '/path/to/dir'
+    #os.system("mkdir {}".format(out_dir))
     print_message(files, file_type)
         
-def get_files(file, file_type, out_dir):
+def get_files(file, file_type):
     """ Downloads files of type 'file_type', specified by the user.
     Input: The file name of the csv file, the type of file that
     the user wants to scrape; can be images, text, or audio
     """
-
-    os.system("mkdir {}".format(out_dir))
-        
+    
     with open(file, 'r') as csvfile:
             filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
             for url in filereader:
@@ -65,14 +65,25 @@ def get_files(file, file_type, out_dir):
                 response = requests.get(url, stream=True)
                 soup = bs(response.text)
 
-                for link in soup.find_all('a'):
-                    db("Here is the link being examined: " + str(link.get('href')).rpartition('/')[2])
-                    for suffix in TYPES_DICT[file_type]:
-                        db("Suffix being examined: " + suffix)
-                        if str(link.get('href')).endswith(suffix):
-                            db("Suffix: " + suffix + " was found. Retrieving...")
-                            files.append(link.get('href'))
-                            urlretrieve(url + '/' + link.get('href'), out_dir + '/' + link.get('href').rpartition('/')[2])
+                if file_type == 'images':
+                    for link in soup.find_all('img'):
+                        db("Here is link: " + str(link))
+                        db("Here is the link being examined: " + str(link.get('src')))
+                        for suffix in TYPES_DICT['images']:
+                            if str(link.get('src')).endswith(suffix):
+                                db("Suffix: " + suffix + " was found. Retrieving...")
+                                files.append(link.get('src'))
+                                urlretrieve(link.get('src'), link.get('src')).rsplit('/')[-1])
+                                
+                else:
+                    for link in soup.find_all('a'):
+                        db("Here is the link being examined: " + str(link.get('href')).rpartition('/')[2])
+                        for suffix in TYPES_DICT[file_type]:
+                            db("Suffix being examined: " + suffix)
+                            if str(link.get('href')).endswith(suffix):
+                                db("Suffix: " + suffix + " was found. Retrieving...")
+                                files.append(link.get('href'))
+                                urlretrieve(url + '/' + link.get('href'), link.get('href').rpartition('/')[2])
 
 
 def print_message(lst, file_type):
