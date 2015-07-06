@@ -73,7 +73,7 @@ def get_files(file, file_type):
                             if str(link.get('src')).endswith(suffix):
                                 db("Suffix: " + suffix + " was found. Retrieving...")
                                 files.append(link.get('src'))
-                                urlretrieve(link.get('src'), str(link.get('src')))
+                                urlretrieve(link.get('src'), link.get('src').rsplit('/')[-1])
                                 
                 else:
                     for link in soup.find_all('a'):
