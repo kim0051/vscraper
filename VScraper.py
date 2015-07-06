@@ -65,14 +65,25 @@ def get_files(file, file_type):
                 response = requests.get(url, stream=True)
                 soup = bs(response.text)
 
-                for link in soup.find_all('a'):
-                    db("Here is the link being examined: " + str(link.get('href')).rpartition('/')[2])
-                    for suffix in TYPES_DICT[file_type]:
-                        db("Suffix being examined: " + suffix)
-                        if str(link.get('href')).endswith(suffix):
-                            db("Suffix: " + suffix + " was found. Retrieving...")
-                            files.append(link.get('href'))
-                            urlretrieve(url + '/' + link.get('href'), link.get('href').rpartition('/')[2])
+                if file_type == 'images':
+                    for link in soup.find_all('img'):
+                        db("Here is link: " + str(link))
+                        db("Here is the link being examined: " + str(link.get('src')))
+                        for suffix in TYPES_DICT['images']:
+                            if str(link.get('src')).endswith(suffix):
+                                db("Suffix: " + suffix + " was found. Retrieving...")
+                                files.append(link.get('src'))
+                                urlretrieve(link.get('src'), str(link.get('src')))
+                                
+                else:
+                    for link in soup.find_all('a'):
+                        db("Here is the link being examined: " + str(link.get('href')).rpartition('/')[2])
+                        for suffix in TYPES_DICT[file_type]:
+                            db("Suffix being examined: " + suffix)
+                            if str(link.get('href')).endswith(suffix):
+                                db("Suffix: " + suffix + " was found. Retrieving...")
+                                files.append(link.get('href'))
+                                urlretrieve(url + '/' + link.get('href'), link.get('href').rpartition('/')[2])
 
 
 def print_message(lst, file_type):
