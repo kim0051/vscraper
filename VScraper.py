@@ -67,13 +67,12 @@ def get_files(file, file_type, out_dir):
 
                 if file_type == 'images':
                     for link in soup.find_all('img'):
-                        db("Here is link: " + str(link))
                         db("Here is the link being examined: " + str(link.get('src')))
                         for suffix in TYPES_DICT['images']:
                             if str(link.get('src')).endswith(suffix):
                                 db("Suffix: " + suffix + " was found. Retrieving...")
                                 files.append(link.get('src'))
-                                urlretrieve(link.get('src'), link.get('src').rsplit('/')[-1])
+                                urlretrieve(link.get('src'), out_dir + '/' + link.get('src').rsplit('/')[-1])
 
                 else:
                     for link in soup.find_all('a'):
