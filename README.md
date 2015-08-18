@@ -39,7 +39,7 @@ A Python web scraping tool that allows users to scrape all files of the type the
 ** **Make sure the CSV  file is in the same directory as VScraper.py**
 
 ## Requirements
-  - This program was made and is run with Python 3.4.2 and uses these libraries in order to run:
+  - This program was made and is run with Python 3.4.3 and uses these libraries in order to run:
   
       - [requests](http://docs.python-requests.org/en/latest/)
       - [BeautifulSoup4](http://www.crummy.com/software/BeautifulSoup/bs4/doc/)
