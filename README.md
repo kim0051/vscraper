@@ -2,7 +2,7 @@
 
 ![alt tag](http://fjv4.com/img/portfolio/vscraper-banner.png)
 
-A Python web scraping tool that allows users to scrape all files of the type they specify from a specified website and then download those files to their local directory.
+A Python web scraping tool that allows users to scrape all files of the type they specify from URLs within the column of a CSV file and then download those files to their local directory.
 
 # CSV Formatting
 | Column 1            |
