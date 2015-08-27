@@ -61,4 +61,4 @@ Do either one of two things:
   
 ## License
 
-Uses the [MIT License](https://github.com/FreddieV4/VScraper/blob/master/LICENSE)
+Uses the [**MIT License**](https://github.com/FreddieV4/VScraper/blob/master/LICENSE)
