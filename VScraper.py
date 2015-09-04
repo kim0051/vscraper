@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup as bs
 import os
 
 TYPES_DICT = {  'images':['.png', '.jpg', '.jpeg', '.gif', '.svg'],
+                'video': ['.swf', '.mpg', '.mpeg'],
                 'audio':['.mp3', '.mp4', '.wmv', '.m4a', '.wav'],
                 'text':['.txt', '.doc', '.docx', '.rtf', '.pdf', '.md'],
                 'code':['.js', '.html', '.css', '.php', '.rb', '.py', '.java', '.c', '.cpp', '.h', '.go', '.cs', '.sql', '.m', '.mat'], }
@@ -51,8 +52,6 @@ def get_files(file, file_type, out_dir):
     Input: The file name of the csv file, the type of file that
     the user wants to scrape; can be images, text, or audio
     """
-
-    os.system("mkdir {}".format(out_dir))
         
     with open(file, 'r') as csvfile:
             filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
@@ -72,6 +71,7 @@ def get_files(file, file_type, out_dir):
                             if str(link.get('src')).endswith(suffix):
                                 db("Suffix: " + suffix + " was found. Retrieving...")
                                 files.append(link.get('src'))
+                                os.system("mkdir {}".format(out_dir))
                                 urlretrieve('http:' + link.get('src'), out_dir + '/' + link.get('src').rsplit('/')[-1])
 
                 else:
@@ -82,6 +82,7 @@ def get_files(file, file_type, out_dir):
                             if str(link.get('href')).endswith(suffix):
                                 db("Suffix: " + suffix + " was found. Retrieving...")
                                 files.append(link.get('href'))
+                                os.system("mkdir {}".format(out_dir))
                                 urlretrieve(url + '/' + link.get('href'), out_dir + '/' + link.get('href').rpartition('/')[2])
 
 
