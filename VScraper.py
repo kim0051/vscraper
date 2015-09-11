@@ -22,12 +22,13 @@ def db(string):
     if(debug):
         print('\t', string)
 
+
 def main():
     """ Main function that asks for user input and prints out results """
 
     file_type = ""
 
-    # checks for command length in terminal/command prompt  
+    # prompts for more information if the user only executes VScraper.py from the command line 
     if len(sys.argv) == 1:
         csv_file_name = input("Enter the CSV file name you want to read from: ") + '.csv'
         if os.path.isfile(csv_file_name):
@@ -36,7 +37,8 @@ def main():
             file_type = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text, code - ")
         else:
             print("\nFile", "'" + csv_file_name + "'", "does not exist in the current directory.")
-   
+
+    # otherwise, check if the command line arguments fit the parameters to run the functions
     else:
         if os.path.isfile(sys.argv[1]):
             csv_file_name = sys.argv[1]
@@ -50,6 +52,7 @@ def main():
         
     get_files(csv_file_name, file_type, file_type)
     print_message(files, file_type)
+
         
 def get_files(file, file_type, out_dir):
     """ Downloads files of type 'file_type', specified by the user.
@@ -104,6 +107,7 @@ def print_message(lst, file_type):
         print("There were", str(len(lst)), "file(s).")
     else:
         print("\nNo files of type", file_type, "were found.")
+
 
 if __name__ == '__main__':
     main()
