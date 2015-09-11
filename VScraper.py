@@ -24,7 +24,8 @@ def db(string):
 
 
 def main():
-    """ Main function that asks for user input and prints out results """
+    """ Main function that reads user input from the command line or
+    asks for user input directly in IDLE and prints out results """
 
     file_type = ""
 
@@ -57,7 +58,8 @@ def main():
 def get_files(file, file_type, out_dir):
     """ Downloads files of type 'file_type', specified by the user.
     Input: The file name of the csv file, the type of file that
-    the user wants to scrape; can be images, text, or audio
+    the user wants to scrape (can be images, text, or audio) and
+    the output folder that needs to be created for the files
     """
         
     with open(file, 'r') as csvfile:
@@ -99,7 +101,7 @@ def get_files(file, file_type, out_dir):
 def print_message(lst, file_type):
     """ Notifies user when done downloading files OR
     if there are no files of the type they specified
-    Input: List of file names, String for file extension
+    Input: List of file names, String for type of files
     """
     
     if lst:
