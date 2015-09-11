@@ -6,6 +6,7 @@ import requests
 from bs4 import BeautifulSoup as bs
 import os
 
+# a dictionary containing all possible file types that may be scraped from URLs
 TYPES_DICT = {  'images':['.png', '.jpg', '.jpeg', '.gif', '.svg'],
                 'video': ['.swf', '.mpg', '.mpeg'],
                 'audio':['.mp3', '.mp4', '.wmv', '.m4a', '.wav'],
@@ -23,7 +24,8 @@ def main():
     """ Main function that asks for user input and prints out results """
 
     file_type = ""
-  
+
+    # checks for command length in terminal/command prompt  
     if len(sys.argv) == 1:
         csv_file_name = input("Enter the CSV file name you want to read from: ") + '.csv'
         if os.path.isfile(csv_file_name):
@@ -56,7 +58,7 @@ def get_files(file, file_type, out_dir):
     with open(file, 'r') as csvfile:
             filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
             for url in filereader:
-                url = url[0]#.rpartition('/')[0]
+                url = url[0]
                 db("URL is: " + url)
                 if not url.startswith('http://') and not url.startswith('https://'):
                     url = 'http://' + url
@@ -64,6 +66,8 @@ def get_files(file, file_type, out_dir):
                 response = requests.get(url, stream=True)
                 soup = bs(response.text)
 
+                # if file type is images, then find <img> tags and concatenate
+                # images links with main URL links
                 if file_type == 'images':
                     for link in soup.find_all('img'):
                         db("Here is the link being examined: " + str(link.get('src')))
@@ -74,6 +78,7 @@ def get_files(file, file_type, out_dir):
                                 os.system("mkdir {}".format(out_dir))
                                 urlretrieve('http:' + link.get('src'), out_dir + '/' + link.get('src').rsplit('/')[-1])
 
+                # otherwise, search for all <a> tags and then retrieve files based on hrefs
                 else:
                     for link in soup.find_all('a'):
                         db("Here is the link being examined: " + str(link.get('href')).rpartition('/')[2])
