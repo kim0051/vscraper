@@ -53,12 +53,10 @@ Do either one of two things:
   1. Create an issue with your suggestion using the tag `enhancement`
   2. Fork this repository, make your changes to `VScraper.py` and submit a pull request
 
-## Creator
-[**VScraper**](https://github.com/FreddieV4/VScraper) was created, and is maintained, by **Freddie Vargus**
-
-  - Personal Site - [**fjv4.com**](http://fjv4.com)
-  - Twitter Profile - [**@Freddie_V4**](http://www.twitter.com/Freddie_V4)
-  
 ## License
 
 Uses the [**MIT License**](https://github.com/FreddieV4/VScraper/blob/master/LICENSE)
+
+
+-------
+Want to find out more? Check out the [Wiki](https://www.github.com/FreddieV4/VScraper/wiki)
