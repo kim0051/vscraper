@@ -59,4 +59,4 @@ Uses the [**MIT License**](https://github.com/FreddieV4/VScraper/blob/master/LIC
 
 
 -------
-Want to find out more? Check out the [Wiki](https://www.github.com/FreddieV4/VScraper/wiki)
+Want to find out more? Check out the [**Wiki**](https://www.github.com/FreddieV4/VScraper/wiki)
