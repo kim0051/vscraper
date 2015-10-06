@@ -78,11 +78,11 @@ def get_files(file, file_type, out_dir):
                 # images links with main URL links
                 if file_type == 'images':
                     for link in soup.find_all('img'):
-                        db("Here is the link being examined: " + str(link.get('src')))
+                        src = link.get('src')
+                        db("Here is the link being examined: " + str(src))
                         for suffix in TYPES_DICT['images']:
-                            if str(link.get('src')).endswith(suffix):
+                            if str(src).endswith(suffix):
                                 db("Suffix: " + suffix + " was found. Attempting retrieval...")
-                                src = link.get('src')
                                 try:
                                     os.system("mkdir {}".format(out_dir))
                                     urlretrieve('http:' + src, out_dir + '/' + src.rsplit('/')[-1])
@@ -93,12 +93,12 @@ def get_files(file, file_type, out_dir):
                 # otherwise, search for all <a> tags and then retrieve files based on hrefs
                 else:
                     for link in soup.find_all('a'):
-                        db("Here is the link being examined: " + str(link.get('href')).rpartition('/')[2])
+                        href = link.get('href')
+                        db("Here is the link being examined: " + str(href.rpartition('/')[2])
                         for suffix in TYPES_DICT[file_type]:
                             db("Suffix being examined: " + suffix)
-                            if str(link.get('href')).endswith(suffix):
+                            if str(href).endswith(suffix):
                                 db("Suffix: " + suffix + " was found. Attempting retrieval...")
-                                href = link.get('href')
                                 try:
                                     os.system("mkdir {}".format(out_dir))
                                     urlretrieve(url + '/' + href, out_dir + '/' + href.rpartition('/')[2])
