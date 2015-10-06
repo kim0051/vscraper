@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 from urllib.request import urlretrieve
+from urllib.error import HTTPError
 import csv
 import requests
 from bs4 import BeautifulSoup as bs
@@ -17,7 +18,7 @@ TYPES_DICT = {  'images': ['.png', '.jpg', '.jpeg', '.gif', '.svg'],
 
 files = []
 
-debug = False
+debug = True
 def db(string):
     if(debug):
         print('\t', string)
@@ -34,8 +35,8 @@ def main():
         csv_file_name = input("Enter the CSV file name you want to read from: ") + '.csv'
         if os.path.isfile(csv_file_name):
             print("File", "'" + csv_file_name + "'", "exists\n")
-            print("Reading CSV file...")
             file_type = input("\nWhat type of file do you want to scrape? \nExamples: images, audio, text, code - ")
+            print("Reading CSV file...")
         else:
             print("\nFile", "'" + csv_file_name + "'", "does not exist in the current directory.")
 
@@ -80,10 +81,13 @@ def get_files(file, file_type, out_dir):
                         db("Here is the link being examined: " + str(link.get('src')))
                         for suffix in TYPES_DICT['images']:
                             if str(link.get('src')).endswith(suffix):
-                                db("Suffix: " + suffix + " was found. Retrieving...")
-                                files.append(link.get('src'))
-                                os.system("mkdir {}".format(out_dir))
-                                urlretrieve('http:' + link.get('src'), out_dir + '/' + link.get('src').rsplit('/')[-1])
+                                db("Suffix: " + suffix + " was found. Attempting retrieval...")
+                                try:
+                                    files.append(link.get('src'))
+                                    os.system("mkdir {}".format(out_dir))
+                                    urlretrieve('http:' + link.get('src'), out_dir + '/' + link.get('src').rsplit('/')[-1])
+                                except HTTPError:
+                                    continue
 
                 # otherwise, search for all <a> tags and then retrieve files based on hrefs
                 else:
@@ -92,10 +96,13 @@ def get_files(file, file_type, out_dir):
                         for suffix in TYPES_DICT[file_type]:
                             db("Suffix being examined: " + suffix)
                             if str(link.get('href')).endswith(suffix):
-                                db("Suffix: " + suffix + " was found. Retrieving...")
-                                files.append(link.get('href'))
-                                os.system("mkdir {}".format(out_dir))
-                                urlretrieve(url + '/' + link.get('href'), out_dir + '/' + link.get('href').rpartition('/')[2])
+                                db("Suffix: " + suffix + " was found. Attempting retrieval...")
+                                try:
+                                    files.append(link.get('href'))
+                                    os.system("mkdir {}".format(out_dir))
+                                    urlretrieve(url + '/' + link.get('href'), out_dir + '/' + link.get('href').rpartition('/')[2])
+                                except HTTPError:
+                                    continue
 
 
 def print_message(lst, file_type):
