@@ -35,8 +35,8 @@ def main():
         csv_file_name = input('Enter the CSV file name you want to read from: ') + '.csv'
         if os.path.isfile(csv_file_name):
             print('File "{}" exists\n'.format(csv_file_name))
-            file_type = input('\nWhat type of file do you want to scrape? \nExamples: images, audio, text, code - ')
-            print('Reading CSV file...')
+            file_type = input('What type of file do you want to scrape? \nExamples: images, audio, text, code - ')
+            print('\nReading CSV file...')
         else:
             print('\nFile "{}" does not exist in the current directory.'.format(csv_file_name))
 
@@ -64,49 +64,49 @@ def get_files(file, file_type, out_dir):
     '''
         
     with open(file, 'r') as csvfile:
-            filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-            for url in filereader:
-                url = url[0]
-                db('URL is: ' + url)
-                if not url.startswith('http://') and not url.startswith('https://'):
-                    url = 'http://' + url
-            
-                response = requests.get(url, stream=True)
-                soup = bs(response.text)
+        filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+        for url in filereader:
+            url = url[0]
+            db('URL is: ' + url)
+            if not url.startswith('http://') and not url.startswith('https://'):
+                url = 'http://' + url
+        
+            response = requests.get(url, stream=True)
+            soup = bs(response.text)
 
-                # if file type is images, then find <img> tags and concatenate
-                # images links with main URL links
-                if file_type == 'images':
-                    for link in soup.find_all('img'):
-                        src = link.get('src')
-                        db('Here is the link being examined: ' + str(src))
-                        for suffix in TYPES_DICT['images']:
-                            if str(src).endswith(suffix):
-                                db('Suffix: ' + suffix + ' was found. Attempting retrieval...')
-                                try:
-                                    os.system('mkdir {}'.format(out_dir))
-                                    urlretrieve('http:' + src, out_dir + '/' + src.rsplit('/')[-1])
-                                    files.append(src)
-                                except HTTPError:
-                                    os.system('rmdir {}'.format(out_dir)) # directory no longer needed; delete
-                                    continue
+            # if file type is images, then find <img> tags and concatenate
+            # images links with main URL links
+            if file_type == 'images':
+                for link in soup.find_all('img'):
+                    src = link.get('src')
+                    db('Here is the link being examined: ' + str(src))
+                    for suffix in TYPES_DICT['images']:
+                        if str(src).endswith(suffix):
+                            db('Suffix: ' + suffix + ' was found. Attempting retrieval...')
+                            try:
+                                os.system('mkdir {}'.format(out_dir))
+                                urlretrieve('http:' + src, out_dir + '/' + src.rsplit('/')[-1])
+                                files.append(src)
+                            except HTTPError:
+                                os.system('rmdir {}'.format(out_dir)) # directory no longer needed; delete
+                                continue
 
-                # otherwise, search for all <a> tags and then retrieve files based on hrefs
-                else:
-                    for link in soup.find_all('a'):
-                        href = link.get('href')
-                        db('Here is the link being examined: ' + str(href.rpartition('/')[2]))
-                        for suffix in TYPES_DICT[file_type]:
-                            db('Suffix being examined: ' + suffix)
-                            if str(href).endswith(suffix):
-                                db('Suffix: ' + suffix + ' was found. Attempting retrieval...')
-                                try:
-                                    os.system('mkdir {}'.format(out_dir))
-                                    urlretrieve(url + '/' + href, out_dir + '/' + href.rpartition('/')[2])
-                                    files.append(href)
-                                except HTTPError:
-                                    os.system('rmdir {}'.format(out_dir)) # directory no longer needed; delete
-                                    continue
+            # otherwise, search for all <a> tags and then retrieve files based on hrefs
+            else:
+                for link in soup.find_all('a'):
+                    href = link.get('href')
+                    db('Here is the link being examined: ' + str(href).rpartition('/')[2])
+                    for suffix in TYPES_DICT[file_type]:
+                        db('Suffix being examined: ' + suffix)
+                        if str(href).endswith(suffix):
+                            db('Suffix: ' + suffix + ' was found. Attempting retrieval...')
+                            try:
+                                os.system('mkdir {}'.format(out_dir))
+                                urlretrieve(url + '/' + href, out_dir + '/' + href.rpartition('/')[2])
+                                files.append(href)
+                            except HTTPError:
+                                os.system('rmdir {}'.format(out_dir)) # directory no longer needed; delete
+                                continue
 
 
 def print_message(lst, file_type):
