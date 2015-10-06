@@ -96,7 +96,6 @@ def get_files(file, file_type, out_dir):
                                 files.append(link.get('href'))
                                 os.system("mkdir {}".format(out_dir))
                                 urlretrieve(url + '/' + link.get('href'), out_dir + '/' + link.get('href').rpartition('/')[2])
-    csvfile.close()
 
 
 def print_message(lst, file_type):
