@@ -82,10 +82,11 @@ def get_files(file, file_type, out_dir):
                         for suffix in TYPES_DICT['images']:
                             if str(link.get('src')).endswith(suffix):
                                 db("Suffix: " + suffix + " was found. Attempting retrieval...")
+                                src = link.get('src')
                                 try:
-                                    files.append(link.get('src'))
                                     os.system("mkdir {}".format(out_dir))
-                                    urlretrieve('http:' + link.get('src'), out_dir + '/' + link.get('src').rsplit('/')[-1])
+                                    urlretrieve('http:' + src, out_dir + '/' + src.rsplit('/')[-1])
+                                    files.append(src)
                                 except HTTPError:
                                     continue
 
@@ -97,10 +98,11 @@ def get_files(file, file_type, out_dir):
                             db("Suffix being examined: " + suffix)
                             if str(link.get('href')).endswith(suffix):
                                 db("Suffix: " + suffix + " was found. Attempting retrieval...")
+                                href = link.get('href')
                                 try:
-                                    files.append(link.get('href'))
                                     os.system("mkdir {}".format(out_dir))
-                                    urlretrieve(url + '/' + link.get('href'), out_dir + '/' + link.get('href').rpartition('/')[2])
+                                    urlretrieve(url + '/' + href, out_dir + '/' + href.rpartition('/')[2])
+                                    files.append(href)
                                 except HTTPError:
                                     continue
 
