@@ -14,7 +14,7 @@ TYPES_DICT = {  'images': ['.png', '.jpg', '.jpeg', '.gif', '.svg'],
                 'text'  : ['.txt', '.doc', '.docx', '.rtf', '.pdf', '.md'],
                 'code'  : ['.js', '.html', '.css', '.php', '.rb', '.py',
                            '.java', '.c', '.cpp', '.h', '.go', '.cs',
-                           '.sql', '.m', '.mat'], }
+                           '.sql', '.R', '.mat'], }
 
 files = []
 
