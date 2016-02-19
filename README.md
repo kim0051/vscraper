@@ -30,7 +30,7 @@ A Python web scraping tool that allows users to scrape all files of the type the
 ### On Windows:
 
   * 2c. cd into the directory containing `VScraper.py`
-  * 3c. Run `py -3 VScraper.py csvname.csv code` in the command prompt
+  * 3c. Run `py VScraper.py csvname.csv code` in the command prompt
   * 4c. Done! All of your files should have been scraped from the URLs, with an output displaying the number of files that were scraped
   
 **The arguments `csvname.csv` would be the name of your csv file, and `code` the type of file you want to scrape**
